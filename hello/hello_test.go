@@ -6,14 +6,24 @@ import "testing"
 // must have (t *testing.T) are functional params
 func TestHello(t *testing.T) {
 	// anon-functions which also is a (t *testing.T) saying that it's a testing function
-	t.Run("saying hello to people", func(t *testing.T) {
-		got := Hello("Marco")
+	t.Run("saying hello to people, in English", func(t *testing.T) {
+		got := Hello("Marco", "English")
 		want := "Hello, Marco"
 		assertCorrectMessage(t, got, want)
 	})
+	t.Run("saying hello to people in Spanish", func(t *testing.T) {
+		got := Hello("Marco", "Spanish")
+		want := "Hola, Marco"
+		assertCorrectMessage(t, got, want)
+	})
+	t.Run("saying hello to people in French", func(t *testing.T) {
+		got := Hello("Marco", "French")
+		want := "Bonjour, Marco"
+		assertCorrectMessage(t, got, want)
+	})
 
-	t.Run("saying 'hello world' if no people specified", func(t *testing.T) {
-		got := Hello("")
+	t.Run("saying 'hello world' in English if no people specified, or language specified", func(t *testing.T) {
+		got := Hello("", "")
 		want := "Hello, World"
 		assertCorrectMessage(t, got, want)
 	})
