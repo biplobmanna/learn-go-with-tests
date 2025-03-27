@@ -1,7 +1,5 @@
 package hello
 
-import "fmt"
-
 const (
 	spanish               = "Spanish"
 	french                = "French"
@@ -16,18 +14,20 @@ func Hello(person, lang string) string {
 		person = "World"
 	}
 
-	prefix := englishGreetingPrefix
+	return greetingPrefix(lang) + person
+}
 
+// (prefix string) -- named return - this creates a variabled 'prefix' with a zero-value, in this case = ""
+// which will be returned when the function returns
+// this will also be present in the go-docs of your function, so the intent can be made clearer
+func greetingPrefix(lang string) (prefix string) {
 	switch lang {
 	case spanish:
 		prefix = spanishGreetingPrefix
 	case french:
 		prefix = frenchGreetingPrefix
+	default:
+		prefix = englishGreetingPrefix
 	}
-
-	return prefix + person
-}
-
-func main() {
-	fmt.Println(Hello("", ""))
+	return
 }
